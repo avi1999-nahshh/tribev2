@@ -126,12 +126,18 @@ For when you want the Next.js frontend to hit a real backend.
 
 ### Cell A — clone & install your repo
 
+The repo is **private**, so cloning from Colab needs an HTTPS URL with a token. Generate a fine-scoped GitHub token (`Contents: read`) at [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) and paste it where indicated.
+
 ```python
-!git clone https://github.com/<you>/tribev2.git /content/tribev2
+import getpass
+GH_TOKEN = getpass.getpass("GitHub token: ")
+!git clone https://oauth2:{GH_TOKEN}@github.com/avi1999-nahshh/tribev2.git /content/tribev2
 %cd /content/tribev2/backend
 !uv pip install --system -e .
 !pip install pyngrok
 ```
+
+(If you flip the repo to public via `gh repo edit avi1999-nahshh/tribev2 --visibility public`, drop the token and clone with the plain HTTPS URL.)
 
 ### Cell B — start uvicorn + ngrok tunnel
 
